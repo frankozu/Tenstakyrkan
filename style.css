@@ -927,6 +927,33 @@ footer {
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
+
+  .hero {
+    background-attachment: scroll; /* disable parallax on mobile */
+    background-position: center top; /* prevent zoomed-in look */
+    background-size: cover;
+    height: 70vh; /* avoid too-tall hero on small screens */
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  /* Fix calendar spacing on mobile */
+  .calendar-container iframe {
+    height: 600px;
+  }
+
+  p, h1, h2, h3, a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   .menu-toggle {
     display: flex; /* ✅ keep flex layout even on mobile */
   }
@@ -962,5 +989,14 @@ footer {
   .nav-links a:hover {
     color: #F4C542;
   }
+}
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .calendar-container iframe {
+    height: 700px;
+  }
 }
