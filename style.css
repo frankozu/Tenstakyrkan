@@ -928,7 +928,7 @@ footer {
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
 
-  .hero .page-hero.small-hero,
+  .hero,
   .omoss-hero,
   .gudstjanster-hero,
   .kontakt-hero  {
