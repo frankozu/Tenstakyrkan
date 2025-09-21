@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tenstakyrkan – En plats för tro, gemenskap och omsorg</title>
+  <meta name="description" content="Välkommen till Tenstakyrkan i Tensta – en plats för tro, gemenskap och omsorg. Här hittar du våra gudstjänster, musikliv och kontaktinformation.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="navbar" class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo-link">
+      <img src="bilder/logga.jpg" alt="Tenstakyrkan logotyp" class="logo">
+      <span class="brand-name">Tenstakyrkan</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Hem</a></li>
+        <li><a href="omoss.html">Om oss</a></li>
+        <li><a href="gudstjanster.html">Gudstjänster</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Meny">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h1>Välkommen till Tenstakyrkan</h1>
+      <p>En församling för hela livet, för alla åldrar och bakgrunder.</p>
+      <div class="hero-buttons">
+        <a href="gudstjanster.html" class="btn btn-primary">Gudstjänster</a>
+        <a href="omoss.html" class="btn btn-secondary">Om oss</a>
+      </div>
+      
+  <a href="#values" aria-label="Scrolla ner">
+    <span class="arrow"></span>
+  </a>
+</div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-container">
+    <!-- Navigation Links -->
+    <nav class="footer-nav">
+      <a href="index.html">Hem</a>
+      <a href="omoss.html">Om oss</a>
+      <a href="gudstjanster.html">Gudstjänster</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <!-- Contact & Social -->
+    <div class="footer-contact">
+      <p><a href="mailto:info@tenstakyrkan.se" class="footer-email">info@tenstakyrkan.se</a></p>
+      
+      <p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Tisslingeplan+34,+163+61+Spånga" 
+           target="_blank" class="footer-address">
+          Tisslingeplan 34, 163 61 Spånga
+        </a>
+      </p>
+<br>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/Tenstakyrkan" target="_blank" aria-label="Facebook" >
+          <img src="bilder/facebook.png" alt="Facebook" class="social-icon">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    © <span id="year"></span> Tenstakyrkans Missionsförsamling
+  </div>
+</footer>
+
+<script>
+  // Auto-update footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+
+<button id="scrollToTop" class="scroll-top-btn" aria-label="Till toppen">↑</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
