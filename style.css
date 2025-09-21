@@ -928,7 +928,10 @@ footer {
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
 
-  .hero {
+  .hero .page-hero.small-hero,
+  .omoss-hero,
+  .gudstjanster-hero,
+  .kontakt-hero  {
     background-attachment: scroll; /* disable parallax on mobile */
     background-position: center top; /* prevent zoomed-in look */
     background-size: cover;
@@ -1004,17 +1007,6 @@ footer {
     word-break: break-word; /* ✅ break long words instead of overflowing */
   }
 
-  .hero,
-  .page-hero.small-hero,
-  .omoss-hero,
-  .gudstjanster-hero,
-  .kontakt-hero {
-    background-size: contain; /* ✅ show full image without cropping */
-    background-repeat: no-repeat;
-    background-position: center top; /* ✅ keeps it nicely positioned */
-    height: auto; /* ✅ adjusts height automatically */
-    min-height: 60vh; /* ✅ ensures hero still takes good space */
-  }
 
   .hero-content {
     padding: 4rem 1rem; /* ✅ add spacing since height is smaller */
