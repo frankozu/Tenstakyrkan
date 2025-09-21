@@ -989,6 +989,36 @@ footer {
   .nav-links a:hover {
     color: #F4C542;
   }
+
+  .about-tabs {
+    flex-wrap: wrap; /* ✅ allows them to move to new line */
+    justify-content: center; /* ✅ center align the rows */
+    gap: 10px; /* ✅ spacing between buttons */
+  }
+
+  .tab-link {
+    flex: 1 1 45%; /* ✅ each tab takes ~45% width on small screens */
+    text-align: center;
+    font-size: 0.9rem;
+    white-space: normal; /* ✅ allow text to wrap if needed */
+    word-break: break-word; /* ✅ break long words instead of overflowing */
+  }
+
+  .hero,
+  .page-hero.small-hero,
+  .omoss-hero,
+  .gudstjanster-hero,
+  .kontakt-hero {
+    background-size: contain; /* ✅ show full image without cropping */
+    background-repeat: no-repeat;
+    background-position: center top; /* ✅ keeps it nicely positioned */
+    height: auto; /* ✅ adjusts height automatically */
+    min-height: 60vh; /* ✅ ensures hero still takes good space */
+  }
+
+  .hero-content {
+    padding: 4rem 1rem; /* ✅ add spacing since height is smaller */
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
