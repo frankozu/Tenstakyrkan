@@ -505,7 +505,6 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   justify-content: center;
   gap: 10px;
   margin-bottom: 30px;
-
   position: sticky;      /* make it stick */
   top: 80px;             /* adjust this so it sits nicely below your navbar */
   background: #faf7f3;   /* same as your page background */
@@ -515,27 +514,6 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 
 #about-nav {
   padding-top: 40px;
-}
-
-
-.tab-link {
-  background: #fff;
-  border: 2px solid #F4C542;
-  border-radius: 30px;
-  padding: 8px 20px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.tab-link:hover {
-  background: #F4C542;
-  color: #002F6C;
-}
-
-.tab-link.active {
-  background: #F4C542;
-  color: #002F6C;
 }
 
 .tab-panels {
@@ -923,19 +901,32 @@ footer {
     flex-direction: column;
     gap: 10px;
   }
+  
 }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
 
   .hero,
-  .omoss-hero,
+  .page-hero.small-hero,
   .gudstjanster-hero,
-  .kontakt-hero  {
-    background-attachment: scroll; /* disable parallax on mobile */
-    background-position: center top; /* prevent zoomed-in look */
-    background-size: cover;
-    height: 70vh; /* avoid too-tall hero on small screens */
+  .kontakt-hero {
+    background-size: cover; /* ✅ show full image without cropping */
+    background-repeat: no-repeat;
+     background-position: center center; /* ✅ center focus */ /* ✅ keeps it nicely positioned */
+    height: auto; /* ✅ adjusts height automatically */
+    min-height: 100vh; /* ✅ ensures hero still takes good space */
+  }
+
+  .omoss-hero,
+  .kontakt-hero {
+    background-attachment: scroll; /* ✅ prevents weird zoom/panning effect on iOS */
+    background-position: center center; /* ✅ keep it centered */
+    background-size: cover; /* ✅ keep full coverage */
+  }
+
+  .hero-content {
+    padding: 4rem 1rem; /* ✅ add spacing since height is smaller */
   }
 
   .hero-content h1 {
@@ -948,9 +939,9 @@ footer {
   }
 
   /* Fix calendar spacing on mobile */
-  .calendar-container iframe {
-    height: 600px;
-  }
+.calendar-container iframe {
+  height: 75vh; /* ✅ makes it adapt to screen height */
+}
 
   p, h1, h2, h3, a {
     word-wrap: break-word;
@@ -992,25 +983,39 @@ footer {
   .nav-links a:hover {
     color: #F4C542;
   }
+/* ✅ Fix tabs so they wrap without overflowing */
+  body, html {
+  overflow-x: hidden;
+}
 
-  .about-tabs {
-    flex-wrap: wrap; /* ✅ allows them to move to new line */
-    justify-content: center; /* ✅ center align the rows */
-    gap: 10px; /* ✅ spacing between buttons */
-  }
+/* ✅ Fix tabs so they wrap without overflowing */
+.about-tabs {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
 
-  .tab-link {
-    flex: 1 1 45%; /* ✅ each tab takes ~45% width on small screens */
-    text-align: center;
-    font-size: 0.9rem;
-    white-space: normal; /* ✅ allow text to wrap if needed */
-    word-break: break-word; /* ✅ break long words instead of overflowing */
-  }
+.tabs {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px; /* ✅ tighter spacing so everything fits */
+}
 
+.tab {
+  flex: 1 1 calc(50% - 10px); /* ✅ two buttons per row */
+  max-width: calc(50% - 10px);
+  font-size: 0.9rem;
+  padding: 10px 8px;
+  text-align: center;
+  white-space: normal; /* ✅ allow line breaks */
+  word-wrap: break-word;
+  line-height: 1.3;
+}
 
-  .hero-content {
-    padding: 4rem 1rem; /* ✅ add spacing since height is smaller */
-  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -1020,5 +1025,24 @@ footer {
 
   .calendar-container iframe {
     height: 700px;
-  }
+     }
+}
+
+  @media (min-width: 1200px) {
+    .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .hero-content h1 {
+      font-size: 4rem;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 800px;
+    }
+    .news-grid, .event-grid {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 28px;
+    }
 }
