@@ -188,27 +188,13 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 }
 
 /* ----- UNIQUE PAGE THEMES ----- */
-.omoss-hero {
-  background: url('bilder/desert.jpg') center/cover no-repeat;
-  min-height: 100vh; /* ✅ ensures section is tall enough to display image */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.gudstjanster-hero {
-  background: url('bilder/pray.jpg') center/cover no-repeat;
-}
-
-.kontakt-hero {
-  background: url('bilder/kontakttenstakyrkan.jpg') center/cover no-repeat;
-}
-
-/* ---------- HERO ---------- */
-.hero {
-  height: 100vh;
-  background: url('bilder/kyrka.jpg') center/cover no-repeat;
+/* ---------- UNIVERSAL HERO STYLES ---------- */
+.hero,
+.omoss-hero,
+.gudstjanster-hero,
+.kontakt-hero,
+.page-hero.small-hero {
+  min-height: 100vh;                 /* full screen height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,8 +202,30 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   position: relative;
   color: #fff;
   overflow: hidden;
-   background-attachment: fixed; /* adds parallax feel on desktop */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+/* Only home hero gets parallax effect */
+.hero {
+  background-image: url('bilder/kyrka.jpg');
+  background-attachment: fixed; /* desktop parallax */
+}
+
+/* Individual page hero backgrounds */
+.omoss-hero {
+  background-image: url('bilder/desert.jpg');
+}
+
+.gudstjanster-hero {
+  background-image: url('bilder/pray.jpg');
+}
+
+.kontakt-hero {
+  background-image: url('bilder/kontakttenstakyrkan.jpg');
+}
+
 
 .hero-overlay {
   position: absolute;
