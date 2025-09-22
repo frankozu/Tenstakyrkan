@@ -190,6 +190,11 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 /* ----- UNIQUE PAGE THEMES ----- */
 .omoss-hero {
   background: url('bilder/desert.jpg') center/cover no-repeat;
+  min-height: 100vh; /* ✅ ensures section is tall enough to display image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .gudstjanster-hero {
@@ -515,6 +520,7 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   padding-top: 40px;
 }
 
+
 .tab-panels {
   margin-top: 30px; /* spacing below tabs */
 }
@@ -535,13 +541,14 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 
 .tabs {
   position: sticky;
-  top: 80px; /* height of your navbar */
+  top: 80px; /* match your navbar height */
   z-index: 100;
   background: #faf7f3;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* always wrap when needed */
   gap: 10px;
-  padding: 15px 0;
+  padding: 15px 10px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -914,28 +921,30 @@ footer {
 }
 
 /* ---------- RESPONSIVE ---------- */
+/* ---------- RESPONSIVE ---------- */
+
+/* ----------- MOBILE (<=768px) ----------- */
 @media (max-width: 768px) {
 
+  /* ✅ HERO SECTIONS */
   .hero,
   .page-hero.small-hero,
+  .omoss-hero,
   .gudstjanster-hero,
   .kontakt-hero {
-    background-size: cover; /* ✅ show full image without cropping */
+    background-size: cover !important;    /* full image */
     background-repeat: no-repeat;
-     background-position: center center; /* ✅ center focus */ /* ✅ keeps it nicely positioned */
-    height: auto; /* ✅ adjusts height automatically */
-    min-height: 100vh; /* ✅ ensures hero still takes good space */
+    background-position: center center !important;
+    background-attachment: scroll !important; /* prevent iOS parallax bug */
+    min-height: 100svh; /* ✅ safer on iOS */
+    height: auto;
+    transform: translateZ(0); /* ✅ iOS hardware acceleration */
+    will-change: transform;
   }
 
-  .omoss-hero,
-  .kontakt-hero {
-    background-attachment: scroll; /* ✅ prevents weird zoom/panning effect on iOS */
-    background-position: center center; /* ✅ keep it centered */
-    background-size: cover; /* ✅ keep full coverage */
-  }
-
+  /* ✅ HERO CONTENT */
   .hero-content {
-    padding: 4rem 1rem; /* ✅ add spacing since height is smaller */
+    padding: 4rem 1rem;
   }
 
   .hero-content h1 {
@@ -949,24 +958,31 @@ footer {
     padding-top: 10px;
   }
 
-  /* Fix calendar spacing on mobile */
-  .calendar-container iframe {
-    min-height: 650px; /* slightly smaller on mobile but still usable */
+  /* ✅ OVERLAY VISIBILITY */
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.35);
   }
 
+  /* ✅ CALENDAR FIX */
+  .calendar-container iframe {
+    min-height: 650px;
+  }
+
+  /* ✅ TEXT WRAPPING */
   p, h1, h2, h3, a {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
+  /* ✅ NAVBAR */
   .menu-toggle {
-    display: flex; /* ✅ keep flex layout even on mobile */
+    display: flex;
   }
+
   .brand-name {
     color: #fff;
   }
- 
-   /* ✅ MOBILE NAV FIX */
+
   .nav-links {
     display: none;
     position: absolute;
@@ -994,12 +1010,13 @@ footer {
   .nav-links a:hover {
     color: #F4C542;
   }
-/* ✅ Fix tabs so they wrap without overflowing */
-  body, html {
-  overflow-x: hidden;
-}
 
-/* ✅ Fix tabs so they wrap without overflowing */
+  /* ✅ PREVENT HORIZONTAL SCROLL */
+  html, body {
+    overflow-x: hidden;
+  }
+
+/* ✅ ABOUT TABS */
 .about-tabs {
   flex-wrap: wrap;
   justify-content: center;
@@ -1010,25 +1027,53 @@ footer {
   box-sizing: border-box;
 }
 
+/* ✅ TABS (Sticky + Responsive) */
 .tabs {
-  flex-wrap: wrap;
+  position: sticky;
+  top: 80px; /* adjust to match navbar height */
+  z-index: 100;
+  background: #faf7f3; /* matches page background */
+  display: flex;
   justify-content: center;
-  gap: 8px; /* ✅ tighter spacing so everything fits */
+  flex-wrap: wrap; /* ensures they break on mobile */
+  gap: 10px;
+  padding: 15px 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
+.tabs.stuck {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* ✅ Tab Buttons (Responsive) */
 .tab {
-  flex: 1 1 calc(50% - 10px); /* ✅ two buttons per row */
+  flex: 1 1 calc(50% - 10px); /* two per row by default */
   max-width: calc(50% - 10px);
   font-size: 0.9rem;
   padding: 10px 8px;
   text-align: center;
-  white-space: normal; /* ✅ allow line breaks */
+  white-space: normal;
   word-wrap: break-word;
   line-height: 1.3;
 }
 
+  .fullscreen-section {
+    display: block; /* ✅ let sticky work properly */
+    align-items: initial;
+    justify-content: initial;
+  }
+
 }
 
+/* ----------- SMALL MOBILE (<=480px) ----------- */
+@media (max-width: 480px) {
+  .tab {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* ----------- TABLETS (769px–1024px) ----------- */
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-content h1 {
     font-size: 2.5rem;
@@ -1036,31 +1081,30 @@ footer {
 
   .calendar-container iframe {
     height: 700px;
-     }
-}
-
-  @media (min-width: 1200px) {
-    .container {
-      width: 80%;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .hero-content h1 {
-      font-size: 4rem;
-    }
-    .hero-content p {
-      font-size: 1.5rem;
-      max-width: 800px;
-    }
-    .news-grid, .event-grid {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 28px;
-    }
-}
-
-@media (max-width: 480px) {
-  .tab {
-    flex: 1 1 100%;  /* ✅ one per row */
-    max-width: 100%;
   }
 }
+
+/* ----------- LARGE SCREENS (>=1200px) ----------- */
+@media (min-width: 1200px) {
+  .container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 4rem;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+    max-width: 800px;
+  }
+
+  .news-grid,
+  .event-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 28px;
+  }
+}
+
