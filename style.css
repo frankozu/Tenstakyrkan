@@ -126,20 +126,6 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 .nav-links a.active { color: #f3c24c; }
 
 
-
-/* ----- UNIQUE PAGE THEMES ----- */
-.omoss-hero {
-  background: url('bilder/desert.jpg') center/cover no-repeat;
-}
-
-.gudstjanster-hero {
-  background: url('bilder/pray.jpg') center/cover no-repeat;
-}
-
-.kontakt-hero {
-  background: url('bilder/kontakttenstakyrkan.jpg') center/cover no-repeat;
-}
-
 /* --- HAMBURGER (closed) --- */
 .menu-toggle {
   display: none;                 /* shown at <=768px in your media query */
@@ -199,6 +185,19 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 /* bottom bar -> / */
 .menu-toggle.open span:nth-child(3) {
   transform: translateY(-50%) rotate(-45deg);
+}
+
+/* ----- UNIQUE PAGE THEMES ----- */
+.omoss-hero {
+  background: url('bilder/desert.jpg') center/cover no-repeat;
+}
+
+.gudstjanster-hero {
+  background: url('bilder/pray.jpg') center/cover no-repeat;
+}
+
+.kontakt-hero {
+  background: url('bilder/kontakttenstakyrkan.jpg') center/cover no-repeat;
 }
 
 /* ---------- HERO ---------- */
@@ -598,6 +597,16 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   display: block; /* clean look, no scrollbars */
 }
 
+.calendar-container iframe {
+  width: 100%;
+  min-height: 700px;
+  max-width: 100%;
+  border-radius: 8px;
+  background: white;
+  display: block;
+}
+
+
 .calendar-container {
   position: relative;
   overflow: hidden;
@@ -936,12 +945,14 @@ footer {
   .hero-content p {
     font-size: 1rem;
     max-width: 90%;
+    text-align: center;
+    padding-top: 10px;
   }
 
   /* Fix calendar spacing on mobile */
-.calendar-container iframe {
-  height: 75vh; /* ✅ makes it adapt to screen height */
-}
+  .calendar-container iframe {
+    min-height: 650px; /* slightly smaller on mobile but still usable */
+  }
 
   p, h1, h2, h3, a {
     word-wrap: break-word;
@@ -1045,4 +1056,11 @@ footer {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 28px;
     }
+}
+
+@media (max-width: 480px) {
+  .tab {
+    flex: 1 1 100%;  /* ✅ one per row */
+    max-width: 100%;
+  }
 }
