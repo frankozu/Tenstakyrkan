@@ -1,4 +1,10 @@
 /* ---------- GLOBAL ---------- */
+
+:root { --nav-height: 72px; }       /* desktop navbar height */
+@media (max-width: 768px) {
+  :root { --nav-height: 64px; }     /* mobile navbar height */
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Inter', sans-serif;
@@ -193,6 +199,7 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 .omoss-hero,
 .gudstjanster-hero,
 .kontakt-hero,
+.verksamheter-hero,
 .page-hero.small-hero {
   min-height: 100vh;                 /* full screen height */
   display: flex;
@@ -218,6 +225,10 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   background-image: url('bilder/desert.jpg');
 }
 
+.verksamheter-hero {
+  background-image: url('bilder/tenstachoir1.jpg');
+}
+
 .gudstjanster-hero {
   background-image: url('bilder/pray.jpg');
 }
@@ -237,6 +248,13 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   position: relative;
   z-index: 2;
   animation: fadeInUp 1s ease forwards;
+  display: flex;                 /* ✅ make it a flex container */
+  flex-direction: column;        /* ✅ stack h1 and p vertically */
+  align-items: center;           /* ✅ center them horizontally */
+  justify-content: center;       /* ✅ center them vertically */
+  text-align: center;            /* ✅ ensure text stays centered */
+  width: 100%;
+  padding: 0 1rem;               /* ✅ small padding for mobile */
 }
 
 .hero-content h1 {
@@ -260,16 +278,7 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
 }
 
 /* ---------- OM OSS HERO FIX ---------- */
-.omoss-hero .hero-content p {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin: 0 auto 2rem auto;
-  max-width: 600px;
-  color: #fefefe !important; /* force bright white */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* subtle shadow for contrast */
-  animation: fadeInUp 1.2s ease-out forwards;
-  text-align: center;
-}
+
 
 
 /* Animate the hero text */
@@ -307,8 +316,18 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   color: #002F6C;
 }
 
+/* ----- VERKSAMHETER ----- */
+.joyful-image {
+  text-align: center;
+  margin: 25px auto;
+}
 
-
+.joyful-photo {
+  max-width: 100%;
+  width: 600px; /* ✅ adjust size for desktop */
+  border-radius: 12px; /* ✅ smooth edges */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
 /* ----- SCROLL TO TOP BUTTON ----- */
 .scroll-top-btn {
@@ -400,16 +419,6 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   justify-content: center;
   text-align: center;
   background-attachment: fixed;
-}
-
-.fullscreen-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 60px 20px;
-  background: #faf7f3; /* light background for contrast */
 }
 
 
@@ -510,100 +519,104 @@ backdrop-filter: blur(6px); /* slight blur gives a modern feel */
   max-width: 600px;
 }
 
-/* ----- ABOUT TABS ----- */
-.about-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
-  position: sticky;      /* make it stick */
-  top: 80px;             /* adjust this so it sits nicely below your navbar */
-  background: #faf7f3;   /* same as your page background */
-  padding: 10px 0;
-  z-index: 10;           /* so it stays above tab content */
-}
 
 #about-nav {
   padding-top: 40px;
 }
 
 
-.tab-panels {
-  margin-top: 30px; /* spacing below tabs */
-}
+/* ============ TABS SECTION (Om oss + Verksamheter) ============ */
 
-.tab-panel {
-  display: none;
-  animation: fadeIn 0.6s ease;
-}
-
-.tab-panel.active {
+#about-nav,
+#verksamhets-nav {
   display: block;
+  position: relative;
+  overflow: visible;
+  background: #faf7f3;
+  padding: 0 20px;
+  -webkit-overflow-scrolling: touch; /* ✅ smoother scrolling on iOS */
 }
 
-.tab-panel h2 {
-  margin-bottom: 15px;
-  color: #002F6C;
-}
-
-.tabs {
+/* ✅ Sticky tabs row - works on both desktop & mobile */
+#about-nav .tabs,
+#verksamhets-nav .tabs {
+  position: -webkit-sticky;
   position: sticky;
-  top: 80px; /* match your navbar height */
-  z-index: 100;
+  top: var(--nav-height); /* ✅ matches your navbar height dynamically */
+  z-index: 1000;
   background: #faf7f3;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  flex-wrap: wrap; /* always wrap when needed */
-  gap: 10px;
+  gap: 12px;
   padding: 15px 10px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  will-change: transform; /* ✅ prevents jitter on iOS */
 }
 
-
-.tabs.stuck {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+.tabs.is-stuck {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
+/* ✅ Reserve space below the tabs so the first heading is never hidden */
+#about-nav .tab-panels,
+#verksamhets-nav .tab-panels {
+  margin-top: 20px;
+  scroll-margin-top: calc(var(--nav-height) + 10px);
+}
+
+/* Tab buttons */
 .tab {
   border: 2px solid #F4C542;
   background: transparent;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background .25s ease, color .25s ease;
 }
 
-.tab:hover {
-  background: #fff6d5;
+.tab:hover  { background: #fff6d5; }
+.tab.active { background: #F4C542; color: #002F6C; }
+
+/* Panels wrapper */
+.tab-panels {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.tab.active {
-  background: #F4C542;
-  color: #002F6C;
-}
-
+/* Panels */
 .tab-content {
   display: none;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn .3s ease;
+  scroll-margin-top: calc(var(--nav-height) + 10px); /* ✅ anchor link safety */
 }
 
-/* Center single-line paragraphs in tab sections */
+.tab-content.active { display: block; }
+
 .tab-content > p {
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
-
-.tab-content.active {
-  display: block;
-}
-
+/* Smooth fade animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+.fullscreen-section {
+  min-height: 100vh;
+  display: block !important;
+  align-items: initial !important;
+  justify-content: initial !important;
+  flex-direction: column;
+  padding: 60px 20px;
+  background: #faf7f3; /* light background for contrast */
 }
 
 
@@ -933,18 +946,17 @@ footer {
 
 /* ----------- MOBILE (<=768px) ----------- */
 @media (max-width: 768px) {
-
   /* ✅ HERO SECTIONS */
   .hero,
   .page-hero.small-hero,
   .omoss-hero,
   .gudstjanster-hero,
   .kontakt-hero {
-    background-size: cover !important;    /* full image */
+    background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center center !important;
     background-attachment: scroll !important; /* prevent iOS parallax bug */
-    min-height: 100svh; /* ✅ safer on iOS */
+    min-height: 100svh;
     height: auto;
     transform: translateZ(0); /* ✅ iOS hardware acceleration */
     will-change: transform;
@@ -952,11 +964,11 @@ footer {
 
   /* ✅ HERO CONTENT */
   .hero-content {
-    padding: 4rem 1rem;
+    padding: 3rem 1rem; /* a little smaller on mobile */
   }
 
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .hero-content p {
@@ -1024,56 +1036,29 @@ footer {
     overflow-x: hidden;
   }
 
-/* ✅ ABOUT TABS */
-.about-tabs {
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 0 auto;
-  max-width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-}
+  /* ✅ TABS ON MOBILE */
 
-/* ✅ TABS (Sticky + Responsive) */
-.tabs {
-  position: sticky;
-  top: 80px; /* adjust to match navbar height */
-  z-index: 100;
-  background: #faf7f3; /* matches page background */
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; /* ensures they break on mobile */
-  gap: 10px;
-  padding: 15px 10px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
-}
-
-.tabs.stuck {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-/* ✅ Tab Buttons (Responsive) */
-.tab {
-  flex: 1 1 calc(50% - 10px); /* two per row by default */
-  max-width: calc(50% - 10px);
-  font-size: 0.9rem;
-  padding: 10px 8px;
-  text-align: center;
-  white-space: normal;
-  word-wrap: break-word;
-  line-height: 1.3;
-}
-
-  .fullscreen-section {
-    display: block; /* ✅ let sticky work properly */
-    align-items: initial;
-    justify-content: initial;
+  #about-nav .tabs,
+  #verksamhets-nav .tabs {
+    top: var(--nav-height); /* dynamic height for mobile too */
+    padding: 12px 8px;
+    gap: 8px;
   }
 
+  .tab {
+    flex: 1 1 calc(50% - 8px);
+    max-width: calc(50% - 8px);
+    font-size: 0.9rem;
+    padding: 10px 6px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tab-panels {
+    margin-top: 15px;
+  }
 }
 
-/* ----------- SMALL MOBILE (<=480px) ----------- */
 @media (max-width: 480px) {
   .tab {
     flex: 1 1 100%;
@@ -1081,38 +1066,4 @@ footer {
   }
 }
 
-/* ----------- TABLETS (769px–1024px) ----------- */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .calendar-container iframe {
-    height: 700px;
-  }
-}
-
-/* ----------- LARGE SCREENS (>=1200px) ----------- */
-@media (min-width: 1200px) {
-  .container {
-    width: 80%;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .hero-content h1 {
-    font-size: 4rem;
-  }
-
-  .hero-content p {
-    font-size: 1.5rem;
-    max-width: 800px;
-  }
-
-  .news-grid,
-  .event-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 28px;
-  }
-}
 
